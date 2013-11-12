@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-app="meetup">
+  <head>
+  <title>AngularJS - Controllers</title>
+  <link href="../build/styles/bootstrap.min.css" rel="stylesheet" media="screen">
+  <link href="../build/styles/main.css" rel="stylesheet" media="screen">
+
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script src="vendor/requirejs/require.js"></script>
+  <script src="build/scripts/main.js"></script>
+
+  
+</head>
+<body>
+  
+  <ul class="breadcrumb">
+    <li><a href="index.html">Home</a> <span class="divider">/</span></li>
+    <li class="active">Scopes</li>
+  </ul>
+  
+  <div class="well">
+    Root: {{pushed}}
+  </div>
+
+  <div ng-controller="scopeA">
+
+    <div class="well">
+      A: {{pushed}}
+    </div>
+  
+    <div class="well" ng-controller="scopeB">
+      B: {{pushed}}<br />
+      <button class="btn" ng-click="push()">Toggle</button>
+    </div>
+  
+    <div class="well" ng-controller="scopeC">
+      C: {{pushed}}<br />
+      <button class="btn" ng-click="push()">Toggle</button>
+    </div>
+    
+  </div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>my project.</title>
+  <link href="styles/bootstrap.min.css" rel="stylesheet" media="screen">
+  <link href="build/styles/main.css" rel="stylesheet" media="screen">
+	
+  <script type="text/javascript" src="vendor/Angular/Angular.js"></script>
+	<script type="text/javascript" data-main="build/scripts/main" src="vendor/requirejs/require.js"></script>
+
+</head>
+<body>
+  <ul class="breadcrumb">
+    <li class="active">Home</li>
+  </ul>
+  <ul>
+    <li><a href="#/scopes">Scopes</a></li>
+    <li><a href="#/jquery">Jquery vs Angular</a></li>
+    <li><a href="#/filters">Filters</a></li>
+    <li><a href="#/iteration">Iteration</a></li>
+    <li><a href="#/directives">Directives</a></li>
+  </ul>
+
+  <div class="main-container pure-u-1" ng-view></div>
+
+</body>
+</html>

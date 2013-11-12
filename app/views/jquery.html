@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html ng-app="meetup">
+  <head>
+  <title>my project.</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+  <link href="css/application.css" rel="stylesheet" media="screen">
+</head>
+<body>
+  
+  <ul class="breadcrumb">
+    <li><a href="index.html">Home</a> <span class="divider">/</span></li>
+    <li class="active">JQuery vs Angular</li>
+  </ul>
+  
+  <div class="well">
+    <button id="jquery-button" class="btn" data-counter="0">
+      Pushed 0 Times</button>
+  </div>
+    
+  <div class="well" ng-controller="ControllerA">
+    <button ng-class="btnClass" ng-click="push()">
+      Pushed {{counter}} Times</button>
+  </div>
+    
+  <div class="well" ng-controller="ControllerB">
+    <button ng-class="{false: 'btn', true: 'btn btn-danger'}[active]" ng-click="push()">Pushed {{counter}} Times</button>
+  </div>
+
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/angular.min.js"></script>
+  <script type="text/javascript">
+  
+  $('#jquery-button').click(function() {
+    var currentCount = $(this).data('counter');
+    var newCount = currentCount + 1;
+    $(this).data('counter', newCount);
+    $(this).toggleClass('btn-danger');
+    $(this).html('Pushed '+newCount+' Times');
+  });
+
+  var meetup =  angular.module('meetup', []);
+  
+  ControllerA = function($scope) {
+    $scope.counter = 0;
+    $scope.btnClass = 'btn';
+    $scope.push = function() {
+      $scope.btnClass = ($scope.btnClass == 'btn') ? 'btn btn-danger' : 'btn';
+      $scope.counter += 1;
+    }
+  }
+  
+  ControllerB = function($scope) {
+    $scope.counter = 0;
+    $scope.active = false;
+    $scope.push = function() {
+      $scope.active = !$scope.active;
+      $scope.counter += 1;
+    }
+  }
+
+  </script>
+
+</body>
+</html>

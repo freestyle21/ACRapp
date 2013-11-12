@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html ng-app="meetup">
+  <head>
+  <title>AngularJS - Controllers</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+  <link href="css/application.css" rel="stylesheet" media="screen">
+</head>
+<body>
+
+  <ul class="breadcrumb">
+    <li><a href="index.html">Home</a> <span class="divider">/</span></li>
+    <li class="active">Filters</li>
+  </ul>
+
+  <div ng-controller="ControllerA">
+
+    <div class="well">
+      <p>{{body}}</p>
+    </div>
+    
+    <div class="well">
+      <p>{{body|highlight}}</p>
+    </div>
+    
+    <div class="well">
+      <p ng-bind-html-unsafe="body|highlight"></p>
+    </div>
+    
+    <div class="well">
+      <p>{{body|shorten:500}}</p>
+    </div>
+    
+    <div class="well">
+      <p>{{body|shorten:200}}</p>
+    </div>
+
+  </div>
+
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/angular.min.js"></script>
+  <script type="text/javascript">
+
+  var filters = angular.module('filters', []);
+
+  filters.filter('highlight', function() {
+    return function(text) {
+      var pattern = /ipsum/g;
+      return text.replace(pattern, '<span style="color:red">ipsum</span>');
+    }
+  });
+
+  filters.filter('shorten', function() {
+    return function(text, length) {
+      return text.substring(0, length) + "...";
+    }
+  });
+
+  var meetup =  angular.module('meetup', ['filters']);
+  
+  
+  ControllerA = function($rootScope, $scope) {
+    $scope.body = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vitae massa eget erat feugiat elementum. Nam iaculis nunc leo, a posuere elit semper at. Phasellus tincidunt, ipsum non tristique scelerisque, lacus nulla blandit dolor, a suscipit nisl mi vitae augue. Nam suscipit accumsan turpis, eu gravida dolor adipiscing in. Interdum et malesuada fames ac ante ipsum primis in faucibus. Curabitur lacus nibh, dapibus a lobortis vel, luctus aliquet augue. Curabitur volutpat sed nisi id dictum. Suspendisse auctor feugiat luctus. Ut interdum tortor ac rutrum semper. Ut dignissim fermentum massa, vitae pulvinar sapien rhoncus ut. Morbi suscipit, est non aliquet facilisis, nulla urna dapibus nulla, ut tristique dui dui at sapien. ";
+  }
+
+  </script>
+
+</body>
+</html>

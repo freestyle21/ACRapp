@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html ng-app="meetup">
+  <head>
+  <title>AngularJS</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+  <link href="css/application.css" rel="stylesheet" media="screen">
+</head>
+<body>
+  
+  <ul class="breadcrumb">
+    <li><a href="index.html">Home</a> <span class="divider">/</span></li>
+    <li class="active">Directives</li>
+  </ul>
+  
+  <div class="well" ng-controller="ControllerA">
+    Band ID: {{band_id}}<br />
+    <bandpicker value="band_id" label="Band A"></bandpicker>
+  </div>
+
+  <div class="well" ng-controller="ControllerB">
+    Band ID: {{band_id}}<br />
+    <bandpicker value="band_id" label="Band B"></bandpicker>
+  </div>
+
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/angular.min.js"></script>
+  <script type="text/javascript">
+  
+  var directives = angular.module('directives', []);
+
+  directives.directive('bandpicker', function() {
+    return {
+      restrict: 'E',
+      scope: { band: '=value', label: '@' },
+      replace: true,
+      template: '<div class="bandpicker">'+
+                  '{{label}}:'+
+                  '<select ng-model="band" ng-options="item.id as item.name for item in items">'+
+                    '<option value="">---Choose a band---</option>'+
+                  '</select>'+
+                '</div>',
+      link: function(scope, element, attrs) {
+        scope.items = [{id:1, name:"Sim Redmond Band"}, {id:2, name:"John Browns Body"}, {id:3, name:"Ayurveda"}, {id:4, name:"The Horse Flies"}];
+      }
+    }
+  });
+
+  var meetup =  angular.module('meetup', ['directives']);
+  
+  ControllerA = function($scope) {
+    $scope.band_id = null;
+  }
+  
+  ControllerB = function($scope) {
+    $scope.band_id = 3;
+  }
+
+  </script>
+
+</body>
+</html>
